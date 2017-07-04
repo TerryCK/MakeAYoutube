@@ -7,6 +7,7 @@ and make Youtube like app, using UICollectionView, addContraints, and build cool
 learn more : https://youtu.be/APQVltARKF8
 
 
+!["ScreenShots"](https://github.com/TerryCK/MakeAYoutube/blob/master/ScreenShot/screenshot.png)
 ### Requirement
 -----------
 
