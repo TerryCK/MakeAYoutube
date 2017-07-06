@@ -9,23 +9,31 @@
 /* Begin PBXBuildFile section */
 		A812AD201F0BD53000A47537 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A812AD1F1F0BD53000A47537 /* Extensions.swift */; };
 		A812AD231F0BD57200A47537 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A812AD221F0BD57200A47537 /* VideoCell.swift */; };
+		A871C8251F0C8FF400F3D47D /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A871C8241F0C8FF400F3D47D /* MenuBar.swift */; };
+		A871C8271F0CB1FD00F3D47D /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A871C8261F0CB1FD00F3D47D /* images.xcassets */; };
+		A871C82A1F0CC1C800F3D47D /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = A871C8291F0CC1C800F3D47D /* Video.swift */; };
+		A87BE6561F0E6CB3001E5378 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87BE6551F0E6CB3001E5378 /* SettingCell.swift */; };
 		A8C2C2181F0B27DC007F406C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C2C2171F0B27DC007F406C /* AppDelegate.swift */; };
 		A8C2C21A1F0B27DD007F406C /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C2C2191F0B27DD007F406C /* HomeController.swift */; };
 		A8C2C21D1F0B27DD007F406C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8C2C21B1F0B27DD007F406C /* Main.storyboard */; };
-		A8C2C21F1F0B27DD007F406C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8C2C21E1F0B27DD007F406C /* Assets.xcassets */; };
 		A8C2C2221F0B27DD007F406C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8C2C2201F0B27DD007F406C /* LaunchScreen.storyboard */; };
+		A8DD39EC1F0E16F500C453EA /* SettingsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8DD39EB1F0E16F500C453EA /* SettingsLauncher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A812AD1F1F0BD53000A47537 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		A812AD221F0BD57200A47537 /* VideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
+		A871C8241F0C8FF400F3D47D /* MenuBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
+		A871C8261F0CB1FD00F3D47D /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
+		A871C8291F0CC1C800F3D47D /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
+		A87BE6551F0E6CB3001E5378 /* SettingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		A8C2C2141F0B27DC007F406C /* MakeAYoutube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MakeAYoutube.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8C2C2171F0B27DC007F406C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A8C2C2191F0B27DD007F406C /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		A8C2C21C1F0B27DD007F406C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		A8C2C21E1F0B27DD007F406C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A8C2C2211F0B27DD007F406C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A8C2C2231F0B27DD007F406C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A8DD39EB1F0E16F500C453EA /* SettingsLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsLauncher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,7 +59,9 @@
 		A812AD211F0BD55500A47537 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A871C8241F0C8FF400F3D47D /* MenuBar.swift */,
 				A812AD221F0BD57200A47537 /* VideoCell.swift */,
+				A87BE6551F0E6CB3001E5378 /* SettingCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -60,8 +70,17 @@
 			isa = PBXGroup;
 			children = (
 				A8C2C2191F0B27DD007F406C /* HomeController.swift */,
+				A8DD39EB1F0E16F500C453EA /* SettingsLauncher.swift */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		A871C8281F0CC1A500F3D47D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A871C8291F0CC1C800F3D47D /* Video.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		A8C2C20B1F0B27DC007F406C = {
@@ -83,11 +102,12 @@
 		A8C2C2161F0B27DC007F406C /* MakeAYoutube */ = {
 			isa = PBXGroup;
 			children = (
-				A812AD241F0BD58800A47537 /* Controllers */,
+				A871C8281F0CC1A500F3D47D /* Model */,
 				A812AD211F0BD55500A47537 /* Views */,
+				A812AD241F0BD58800A47537 /* Controllers */,
 				A812AD1E1F0BD50E00A47537 /* Helpers */,
 				A8C2C21B1F0B27DD007F406C /* Main.storyboard */,
-				A8C2C21E1F0B27DD007F406C /* Assets.xcassets */,
+				A871C8261F0CB1FD00F3D47D /* images.xcassets */,
 				A8C2C2201F0B27DD007F406C /* LaunchScreen.storyboard */,
 				A8C2C2231F0B27DD007F406C /* Info.plist */,
 			);
@@ -154,8 +174,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A871C8271F0CB1FD00F3D47D /* images.xcassets in Resources */,
 				A8C2C2221F0B27DD007F406C /* LaunchScreen.storyboard in Resources */,
-				A8C2C21F1F0B27DD007F406C /* Assets.xcassets in Resources */,
 				A8C2C21D1F0B27DD007F406C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -167,10 +187,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8DD39EC1F0E16F500C453EA /* SettingsLauncher.swift in Sources */,
 				A8C2C21A1F0B27DD007F406C /* HomeController.swift in Sources */,
+				A87BE6561F0E6CB3001E5378 /* SettingCell.swift in Sources */,
+				A871C82A1F0CC1C800F3D47D /* Video.swift in Sources */,
 				A812AD231F0BD57200A47537 /* VideoCell.swift in Sources */,
 				A812AD201F0BD53000A47537 /* Extensions.swift in Sources */,
 				A8C2C2181F0B27DC007F406C /* AppDelegate.swift in Sources */,
+				A871C8251F0C8FF400F3D47D /* MenuBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,13 +317,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = Y8SJ5M44N4;
 				INFOPLIST_FILE = MakeAYoutube/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.MapVision.MakeAYoutube;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -307,13 +334,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = Y8SJ5M44N4;
 				INFOPLIST_FILE = MakeAYoutube/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.MapVision.MakeAYoutube;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
