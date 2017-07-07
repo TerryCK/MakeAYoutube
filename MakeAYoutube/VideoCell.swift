@@ -28,8 +28,6 @@ class BaseCell: UICollectionViewCell {
 
 class VideoCell: BaseCell, CGMakeable {
     
-    
-    
     var video: Video? {
         
         didSet {

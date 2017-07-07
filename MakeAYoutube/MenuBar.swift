@@ -10,20 +10,47 @@ import UIKit
 
 
 class MenuBar: BaseCell, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, CGMakeable {
-   
+    
+    
+    var homeController: HomeController?
     
     override func setupViews() {
         addSubview(collectionView)
         addConstraintsWithFormat(format: "V:|[v0]|", view: collectionView)
         addConstraintsWithFormat(format: "H:|[v0]|", view: collectionView)
+        
         collectionView.register(MenuCell.self, forCellWithReuseIdentifier: cellID)
         
         let selectedIndexPath = IndexPath(item: 0, section: 0)
-       
         collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: .top)
-
+        setupHorizontalBar()
     }
     
+    var horizontalBarAnchorConstraint: NSLayoutConstraint?
+    
+    func setupHorizontalBar() {
+        let horizontalBarView = UIView()
+        horizontalBarView.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        addSubview(horizontalBarView)
+        horizontalBarView.translatesAutoresizingMaskIntoConstraints = false
+        
+        horizontalBarAnchorConstraint = horizontalBarView.leftAnchor.constraint(equalTo: self.leftAnchor)
+        horizontalBarAnchorConstraint?.isActive = true
+        
+        horizontalBarView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/4).isActive = true
+        horizontalBarView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        horizontalBarView.heightAnchor.constraint(equalToConstant: 4).isActive = true
+        horizontalBarView.layer.cornerRadius = 4
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let x = CGFloat(indexPath.item) * frame.width / 4
+        horizontalBarAnchorConstraint?.constant = x
+        
+        homeController?.scrollToMenuIndex(menuIndex: indexPath.item)
+        
+    }
     
     let cellID = "cellID"
     let imageNames = ["home", "fire", "user", "video"]
@@ -31,7 +58,7 @@ class MenuBar: BaseCell, UICollectionViewDataSource, UICollectionViewDelegateFlo
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-//        cv.backgroundColor = UIColor.rgb(red: 230, green: 32, blue: 31)
+        //        cv.backgroundColor = UIColor.rgb(red: 230, green: 32, blue: 31)
         cv.backgroundColor = UIColor.rgb(red: 140 , green: 197, blue: 115)
         cv.delegate = self
         cv.dataSource = self
@@ -65,7 +92,7 @@ class MenuBar: BaseCell, UICollectionViewDataSource, UICollectionViewDelegateFlo
 class MenuCell : BaseCell {
     
     let imageView: UIImageView = {
-    let iv = UIImageView()
+        let iv = UIImageView()
         iv.image = UIImage(named: "home")?.withRenderingMode(.alwaysTemplate)
         iv.tintColor = UIColor.rgb(red: 91, green: 14, blue: 13)
         return iv

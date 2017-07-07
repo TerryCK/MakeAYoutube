@@ -9,9 +9,11 @@
 import UIKit
 
 class SettingCell: BaseCell {
+    
     var setting: Setting? {
+       
         didSet {
-            nameLabel.text = setting?.title
+            nameLabel.text = setting?.title.rawValue
             if let imageName = setting?.imageName {
                 iconImageView.image = UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate)
                 iconImageView.tintColor = UIColor.white
@@ -24,7 +26,7 @@ class SettingCell: BaseCell {
             print(isHighlighted)
             iconImageView.tintColor = isHighlighted ?  UIColor.darkGray : UIColor.white
             nameLabel.textColor = isHighlighted ? UIColor.darkGray : UIColor.white
-            backgroundColor = isHighlighted ? UIColor.white : UIColor.darkGray
+            backgroundColor = isHighlighted ? UIColor.white : UIColor.clear
         }
     }
     

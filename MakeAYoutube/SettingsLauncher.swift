@@ -8,9 +8,13 @@
 
 import UIKit
 
-struct Setting {
-    let title: String
-    let imageName: String
+enum Settings: String {
+    case settings = "Settings"
+    case privacy = "Terms & privacy policy"
+    case feedback = "Send Feedback"
+    case help = "Help"
+    case switchAccount = "Switch Account"
+    case cancel = "Cancel & Dismiss"
 }
 
 class SettingsLauncher: NSObject, CGMakeable, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
@@ -21,18 +25,18 @@ class SettingsLauncher: NSObject, CGMakeable, UICollectionViewDelegate, UICollec
     let blackView = UIView()
     
     let settings: [Setting] = {
-        
+        let seteingBtn = Setting(title: .settings, imageName: "settings"),
+            privacyBtn = Setting(title: .privacy, imageName: "privacy"),
+            feedbackBtn = Setting(title: .feedback, imageName: "feedback"),
+            helpBtn = Setting(title: .help, imageName: "help"),
+            switchAccountBtn = Setting(title: .switchAccount, imageName: "switchAccount"),
+            cancel = Setting(title: .cancel, imageName: "cancel")
         return [
-        Setting(title: "Settings", imageName: "settings"),
-        Setting(title: "Terms & privacy policy", imageName: "privacy"),
-        Setting(title: "Send Feedback", imageName: "feedback"),
-        Setting(title: "Help", imageName: "help"),
-        Setting(title: "Switch Account", imageName: "switchAccount"),
-        Setting(title: "Cancel", imageName: "cancel")
+            seteingBtn, privacyBtn, feedbackBtn, helpBtn, switchAccountBtn, cancel
         ]
-        
     }()
     
+    var homeController: HomeController?
     
     let collectView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -46,7 +50,7 @@ class SettingsLauncher: NSObject, CGMakeable, UICollectionViewDelegate, UICollec
         if let window = UIApplication.shared.keyWindow {
             
             blackView.backgroundColor = UIColor(white: 0, alpha: 0.5)
-            blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDissmiss)))
+            blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDismissbyGestrue)))
             
             window.addSubview(blackView)
             window.addSubview(collectView)
@@ -63,7 +67,7 @@ class SettingsLauncher: NSObject, CGMakeable, UICollectionViewDelegate, UICollec
             blackView.frame = window.frame
             blackView.alpha = 0
             
-            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 
                 self.blackView.alpha = 1
                 self.collectView.frame = self.cgRectMake(0, y, window.frame.width, height)
@@ -72,13 +76,23 @@ class SettingsLauncher: NSObject, CGMakeable, UICollectionViewDelegate, UICollec
         }
     }
     
-    func handleDissmiss() {
-        UIView.animate(withDuration: 0.5) {
+    func handleDismiss(for setting: Setting?) {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
             self.blackView.alpha = 0
             
             guard let window = UIApplication.shared.keyWindow else { return }
             self.collectView.frame = self.cgRectMake(0, window.frame.height, self.collectView.frame.width, self.collectView.frame.height)
-        }
+        }, completion: { (bool) in
+            if let setting = setting {
+                if setting.title != .cancel {
+                    self.homeController?.showController(for: setting)
+                }
+            }
+        })
+    }
+    
+    func handleDismissbyGestrue() {
+        handleDismiss(for: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -99,6 +113,12 @@ class SettingsLauncher: NSObject, CGMakeable, UICollectionViewDelegate, UICollec
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let setting = self.settings[indexPath.item]
+        handleDismiss(for: setting)
     }
     
     override init() {

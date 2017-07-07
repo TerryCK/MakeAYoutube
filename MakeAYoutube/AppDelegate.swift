@@ -21,7 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         let layout = UICollectionViewFlowLayout()
+//        layout.scrollDirection = .horizontal 
         window?.rootViewController = UINavigationController(rootViewController: HomeController(collectionViewLayout: layout))
+        
 //        UINavigationBar.appearance().barTintColor = UIColor.rgb(red: 230, green: 32, blue: 31)
         UINavigationBar.appearance().barTintColor = UIColor.rgb(red: 140 , green: 197, blue: 115)
         
@@ -34,12 +36,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.statusBarStyle = .lightContent
         
         let statusBarBackgroundView = UIView()
-//        statusBarBackgroundView.backgroundColor = UIColor.rgb(red: 194, green: 31, blue: 31)
+        statusBarBackgroundView.backgroundColor = UIColor.rgb(red: 194, green: 31, blue: 31)
         statusBarBackgroundView.backgroundColor = UIColor.rgb(red: 140 , green: 197, blue: 180)
 
         window?.addSubview(statusBarBackgroundView)
         window?.addConstraintsWithFormat(format: "H:|[v0]|", view: statusBarBackgroundView)
         window?.addConstraintsWithFormat(format: "V:|[v0(20)]", view: statusBarBackgroundView)
+        
+        
         
         return true
     }

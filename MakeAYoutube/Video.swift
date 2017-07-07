@@ -25,6 +25,11 @@ class Channel: NSObject {
 }
 
 
+struct Setting {
+    let title: Settings
+    let imageName: String
+    }
+
 
 
 // for xcode 9 , Swift 4 , Parsing JSON
