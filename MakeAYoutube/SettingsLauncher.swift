@@ -17,7 +17,7 @@ enum Settings: String {
     case cancel = "Cancel & Dismiss"
 }
 
-class SettingsLauncher: NSObject, CGMakeable, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+class SettingsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, CGMakeable {
     
     let cellID = "cellID"
     let cellHeight = 50
@@ -48,10 +48,8 @@ class SettingsLauncher: NSObject, CGMakeable, UICollectionViewDelegate, UICollec
     func showSetting() {
         
         if let window = UIApplication.shared.keyWindow {
-            
             blackView.backgroundColor = UIColor(white: 0, alpha: 0.5)
             blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDismissbyGestrue)))
-            
             window.addSubview(blackView)
             window.addSubview(collectView)
             let blurEffect = UIBlurEffect(style: .dark)

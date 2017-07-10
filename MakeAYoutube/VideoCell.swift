@@ -32,14 +32,12 @@ class VideoCell: BaseCell, CGMakeable {
         
         didSet {
             titleLabel.text = video?.title
-//            thumbnailImageView.image = UIImage(named: (video?.thumbnailImageName)! )
-//            userProfileImageView.image = UIImage(named: (video?.channal?.profileImageName)!)
             
             setupProfileImage()
             setupThumbnailImage()
             
            
-            if let name = video?.channal?.name, let numberOfViews = video?.numberOfViews {
+            if let name = video?.channel?.name, let numberOfViews = video?.number_of_views {
                 let numberFormatter = NumberFormatter()
                 numberFormatter.numberStyle = .decimal
                 let numberViews = numberFormatter.string(from: numberOfViews)!
@@ -65,13 +63,13 @@ class VideoCell: BaseCell, CGMakeable {
     
     
     func setupProfileImage() {
-        if let profileImageUrl = video?.channal?.profileImageName {
+        if let profileImageUrl = video?.channel?.profile_image_name {
             userProfileImageView.loadImageUsingUrlString(urlString: profileImageUrl)
         }
         
     }
     func setupThumbnailImage() {
-        if let thumbnailImageUrl = video?.thumbnailImageName {
+        if let thumbnailImageUrl = video?.thumbnail_image_name {
             thumbnailImageView.loadImageUsingUrlString(urlString: thumbnailImageUrl)
         }
     }
