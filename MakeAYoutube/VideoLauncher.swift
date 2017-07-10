@@ -23,8 +23,18 @@ class VideoPlayerView: UIView {
         let label = UILabel()
         label.text = "00:00"
         label.textColor = UIColor.white
-        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.font = UIFont.boldSystemFont(ofSize: 13)
         label.textAlignment = .right
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        return(label)
+    }()
+    
+    var currentLabel: UILabel = {
+        let label = UILabel()
+        label.text = "00:00"
+        label.textColor = UIColor.white
+        label.font = UIFont.boldSystemFont(ofSize: 13)
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return(label)
@@ -56,21 +66,18 @@ class VideoPlayerView: UIView {
     
     
     func handleSliderChange() {
-        print(videoSlider.value)
-        
-        
         if let duration = player?.currentItem?.duration {
             let totalSeconds = CMTimeGetSeconds(duration)
+            
+            guard !(totalSeconds.isNaN || totalSeconds.isInfinite) else {
+                print("totalSeconds error"); return // or do some error handling
+            }
             let value = Float64(videoSlider.value) * totalSeconds
             let seekTime = CMTime(value: Int64(value), timescale: 1)
             player?.seek(to: seekTime, completionHandler: { (completedSeek) in
-                <#code#>
+                
             })
         }
-        
-        
-        
-        
     }
     
     func handlePause() {
@@ -94,10 +101,21 @@ class VideoPlayerView: UIView {
     }()
     
     
+    private func setupGradientLayer() {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = bounds
+        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.red.cgColor]
+        gradientLayer.locations = [0.7, 1.2]
+        controllerContainerView.layer.addSublayer(gradientLayer)
+        
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         controllerContainerView.frame = frame
         setupPlayView()
+        setupGradientLayer()
+        
         addSubview(controllerContainerView)
         controllerContainerView.addSubview(activityIndicatorView)
         activityIndicatorView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
@@ -113,16 +131,25 @@ class VideoPlayerView: UIView {
         
         controllerContainerView.addSubview(videoLengthLabel)
         
-        videoLengthLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -8 ).isActive = true
-        videoLengthLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        videoLengthLabel.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        videoLengthLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -8).isActive = true
+        videoLengthLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2).isActive = true
+        videoLengthLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true
         videoLengthLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        
+        
+        
+        controllerContainerView.addSubview(currentLabel)
+        currentLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
+        currentLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2).isActive = true
+        currentLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        currentLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        
         
         
         controllerContainerView.addSubview(videoSlider)
         videoSlider.rightAnchor.constraint(equalTo: videoLengthLabel.leftAnchor).isActive = true
         videoSlider.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        videoSlider.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        videoSlider.leftAnchor.constraint(equalTo: currentLabel.rightAnchor).isActive = true
         videoSlider.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         backgroundColor = UIColor.black
@@ -144,6 +171,24 @@ class VideoPlayerView: UIView {
             
             
             player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
+            
+            
+            let interval = CMTime(value: 1, timescale: 2)
+            player?.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main, using: { (progressTime) in
+                let seconds = CMTimeGetSeconds(progressTime)
+                let secondsString = String(format: "%02d", Int(seconds) % 60)
+                let minutesString = String(format: "%02d", Int(seconds) / 60)
+                
+                self.currentLabel.text = "\(minutesString):\(secondsString)"
+
+                
+                if let duration = self.player?.currentItem?.duration {
+                    let durationSeconds = CMTimeGetSeconds(duration)
+                    self.videoSlider.value = Float(seconds / durationSeconds)
+                }
+            
+            })
+            
         }
         
     }
@@ -161,17 +206,14 @@ class VideoPlayerView: UIView {
                 
                 videoLengthLabel.text = "\(minutesText):\(seconsText)"
             }
-            
-            
+
         }
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
-    
+
 }
 
 class VideoLauncher {
